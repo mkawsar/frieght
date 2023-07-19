@@ -4,5 +4,5 @@ namespace App\Interfaces;
 
 interface SourceInterface
 {
-    public function getUrl(): string;
+    public function getAuthUrl(): string;
 }

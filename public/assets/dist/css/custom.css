@@ -9,3 +9,10 @@
     background-color: #F8D7DA;
     border-color: #F8D7DA;
 }
+
+.parsley-errors-list > li {
+    list-style: none;
+    margin-left: -40px;
+    font-size: 15px;
+    color: #ff5b4a;
+}

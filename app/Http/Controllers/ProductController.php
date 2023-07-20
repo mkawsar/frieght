@@ -39,7 +39,7 @@ class ProductController extends Controller
             // Make a file path where image will be stored [ folder path + file name + file extension]
             $filePath = $folder . $name . '.' . $image->getClientOriginalExtension();
             // Upload image
-            $imageID = $this->upload($image, $folder, 'public', $name);
+            $imageID = $this->upload($image, $folder, 'public', $name, $image->getClientMimeType());
         }
 
         return $imageID;

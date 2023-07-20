@@ -51,12 +51,14 @@
                         <div class="col-sm-10">
                             <select name="currency" id="currency"
                                     class="form-control select2 @if($errors->has('currency')) is-invalid @endif"
-                                    data-parsley-required="true">
+                                    data-parsley-required="true"
+                                    data-parsley-errors-container="#productCurrencyValidationErrorMessage">
                                 <option value="">Select an Option</option>
                                 @foreach($currencies as $item)
                                     <option value="{{ $item['code'] }}">{{ $item['name'] }}</option>
                                 @endforeach
                             </select>
+                            <div id="productCurrencyValidationErrorMessage"></div>
                             @if($errors->has('currency'))
                                 <span class="error invalid-feedback">{{ $errors->first('currency') }}</span>
                             @endif
@@ -80,8 +82,16 @@
                     <div class="form-group row">
                         <label for="uom" class="col-sm-2 col-form-label">Product UOM</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control @if($errors->has('uom')) is-invalid @endif"
-                                   name="uom" id="uom" placeholder="Product UOM" data-parsley-required="true" value="{{ old('uom') }}">
+                            <select name="uom" id="uom"
+                                    class="form-control select2 @if($errors->has('uom')) is-invalid @endif"
+                                    data-parsley-required="true"
+                                    data-parsley-errors-container="#productUOMValidationErrorMessage">
+                                <option value="">Select an Option</option>
+                                @foreach($uomcodes as $item)
+                                    <option value="{{ $item['code'] }}">{{ $item['name'] }}</option>
+                                @endforeach
+                            </select>
+                            <div id="productUOMValidationErrorMessage"></div>
                             @if($errors->has('uom'))
                                 <span class="error invalid-feedback">{{ $errors->first('uom') }}</span>
                             @endif
@@ -92,7 +102,8 @@
                         <label for="upc" class="col-sm-2 col-form-label">Product UPC</label>
                         <div class="col-sm-10">
                             <input type="text" class="form-control @if($errors->has('upc')) is-invalid @endif"
-                                   name="upc" id="upc" placeholder="Product UPC" data-parsley-required="true" value="{{ old('upc') }}">
+                                   name="upc" id="upc" placeholder="Product UPC" data-parsley-required="true"
+                                   value="{{ old('upc') }}">
                             @if($errors->has('upc'))
                                 <span class="error invalid-feedback">{{ $errors->first('upc') }}</span>
                             @endif
@@ -102,7 +113,8 @@
                         <label for="sku" class="col-sm-2 col-form-label">Product SKU</label>
                         <div class="col-sm-10">
                             <input type="text" class="form-control @if($errors->has('sku')) is-invalid @endif"
-                                   name="sku" id="sku" placeholder="Product SKU" data-parsley-required="true" value="{{ old('sku') }}">
+                                   name="sku" id="sku" placeholder="Product SKU" data-parsley-required="true"
+                                   value="{{ old('sku') }}">
                             @if($errors->has('sku'))
                                 <span class="error invalid-feedback">{{ $errors->first('sku') }}</span>
                             @endif
@@ -120,7 +132,6 @@
                             @endif
                         </div>
                     </div>
-
                     <div class="form-group row">
                         <label for="width" class="col-sm-2 col-form-label">Width</label>
                         <div class="col-sm-10">
@@ -186,6 +197,7 @@
         $(document).ready(function () {
             $('#create-product-form').parsley();
             $('#currency').select2();
+            $('#uom').select2();
         });
     </script>
 @stop

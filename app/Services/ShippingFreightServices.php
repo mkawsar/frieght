@@ -101,7 +101,6 @@ class ShippingFreightServices implements ShippingFreightInterface
             ]
         ];
     }
-
     public function getCountryCode(): array
     {
         return [
@@ -1095,7 +1094,6 @@ class ShippingFreightServices implements ShippingFreightInterface
             ]
         ];
     }
-
     public function getPackageType(): array
     {
         return [
@@ -1132,7 +1130,6 @@ class ShippingFreightServices implements ShippingFreightInterface
             ['code' => 'UNIT'],
         ];
     }
-
     public function getCurrencyCode(): array
     {
         return [
@@ -1611,6 +1608,113 @@ class ShippingFreightServices implements ShippingFreightInterface
             [
                 'name' => 'Zimbabwean Dollar',
                 'code' => 'ZWL'
+            ]
+        ];
+    }
+    public function getUOMCode(): array
+    {
+        return [
+            [
+                'name' => 'CARAT',
+                'code' => 'AR',
+            ],
+            [
+                'name' => 'CENTIMETER',
+                'code' => 'CM',
+            ],
+            [
+                'name' => 'CUBIC FOOT',
+                'code' => 'CFT',
+            ],
+            [
+                'name' => 'CUBIC METER',
+                'code' => 'M3',
+            ],
+            [
+                'name' => 'DOZEN',
+                'code' => 'DOZ',
+            ],
+            [
+                'name' => 'DOZEN PAIR',
+                'code' => 'DPR',
+            ],
+
+            [
+                'name' => 'EACH',
+                'code' => 'EA',
+            ],
+            [
+                'name' => 'FOOT',
+                'code' => 'LFT',
+            ],
+            [
+                'name' => 'GRAM',
+                'code' => 'G',
+            ],
+            [
+                'name' => 'GROSS',
+                'code' => 'GR',
+            ],
+            [
+                'name' => 'KILOGRAM',
+                'code' => 'KG',
+            ],
+            [
+                'name' => 'LINEAR METER',
+                'code' => 'LNM',
+            ],
+
+            [
+                'name' => 'LITER',
+                'code' => 'LTR',
+            ],
+            [
+                'name' => 'METER',
+                'code' => 'M',
+            ],
+            [
+                'name' => 'MILLIGRAM',
+                'code' => 'MG',
+            ],
+            [
+                'name' => 'MILLILITER',
+                'code' => 'ML',
+            ],
+            [
+                'name' => 'NUMBER',
+                'code' => 'NO',
+            ],
+            [
+                'name' => 'OUNCE',
+                'code' => 'OZ',
+            ],
+            [
+                'name' => 'PAIR',
+                'code' => 'PR',
+            ],
+            [
+                'name' => 'PIECES',
+                'code' => 'PCS',
+            ],
+            [
+                'name' => 'POUND',
+                'code' => 'LB',
+            ],
+            [
+                'name' => 'SQUARE FOOT',
+                'code' => 'SFT',
+            ],
+            [
+                'name' => 'SQUARE METER (M2)',
+                'code' => 'M2',
+            ],
+            [
+                'name' => 'SQUARE YARD',
+                'code' => 'SYD',
+            ],
+            [
+                'name' => 'YARD',
+                'code' => 'YD',
             ]
         ];
     }

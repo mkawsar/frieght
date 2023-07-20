@@ -23,7 +23,8 @@ class ProductController extends Controller
     public function create(ShippingFreightInterface $shipping): object
     {
         $currencies = $shipping->getCurrencyCode();
-        return view('product.create', ['currencies' => $currencies]);
+        $uomcodes = $shipping->getUOMCode();
+        return view('product.create', ['currencies' => $currencies, 'uomcodes' => $uomcodes]);
     }
 
     public function store(CreateProductFormRequest $request)

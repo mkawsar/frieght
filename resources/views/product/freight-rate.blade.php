@@ -245,7 +245,7 @@
                     <div class="row">
                         <div class="col-sm-6">
                             <div class="form-group">
-                                <label for="street_line">Street Lines</label>
+                                <label for="street_line">Recipient Street Lines</label>
                                 <input type="text" name="street_line" id="street_line"
                                        value="{{ old('street_line') }}"
                                        class="form-control @if($errors->has('street_line')) is-invalid @endif"

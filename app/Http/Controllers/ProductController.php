@@ -23,9 +23,10 @@ class ProductController extends Controller
         $this->shipping = $shipping;
     }
 
-    public function index(): object
+    public function index(Product $product): object
     {
-        return view('product.index');
+        $products = $product->query()->with('rated')->paginate(1);
+        return view('product.index', ['products' => $products]);
     }
 
     public function create(): object

@@ -4,11 +4,12 @@ namespace App\Traits;
 
 use App\Models\FedexAuth;
 use Carbon\Carbon;
+use GuzzleHttp\Client;
 
 trait FedexFreightTrait
 {
 
-    public function getOauth(): object
+    public function getOauth(): string
     {
         $token = new \stdClass();
         $existingToken = FedexAuth::query()->first();
@@ -26,7 +27,7 @@ trait FedexFreightTrait
                 }
             }
         }
-        return $token;
+        return $token->access_token;
     }
 
     private function getToken(): object
@@ -53,5 +54,23 @@ trait FedexFreightTrait
 
         $token->save();
         return $token;
+    }
+
+    public function getFreightRate($data)
+    {
+        $token = $this->getOauth();
+        $url = env('FEDEX_FREIGHT_API') . '/rate/v1/freight/rates/quotes';
+
+        $headers = [
+            'Authorization' => 'Bearer ' . $token,
+            'X-locale' => 'en_US',
+            'Content-Type' => 'application/json'
+        ];
+        $client = new Client(['headers' => $headers]);
+        $request = $client->request('POST', $url, [
+            'body' => $data
+        ]);
+        $response = $request->getBody()->getContents();
+        return json_decode($response, true);
     }
 }

@@ -5,9 +5,9 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Product extends Model
+class ProductFreightRate extends Model
 {
     use HasFactory;
-    protected $table = 'products';
-    protected $fillable = ['status', 'updated_by'];
+
+    protected $table = 'product_freight_rates';
 }

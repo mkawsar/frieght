@@ -11,5 +11,6 @@ Route::group([
         Route::get('/create', [ProductController::class, 'create'])->name('create');
         Route::post('/store', [ProductController::class, 'store'])->name('store');
         Route::get('/{uuid}/freight/rate', [ProductController::class, 'getProductRates'])->name('freight.rate');
+        Route::post('/freight/rate', [ProductController::class, 'storeProductFreightRate'])->name('store.freight.rate');
     });
 });

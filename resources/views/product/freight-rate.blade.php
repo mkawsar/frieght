@@ -87,19 +87,36 @@
             <div class="card-header">
                 <h3 class="card-title">Get Product Freight Rate</h3>
             </div>
-            <form class="form-horizontal" action="#" id="freight-rate-product-form" method="POST">
+            <form class="form-horizontal" action="{{ route('product.store.freight.rate') }}"
+                  id="freight-rate-product-form" method="POST">
                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
                 <input type="hidden" name="uuid" value="{{ $product->uuid }}">
                 <div class="card-body">
-                    <div class="form-group row">
-                        <label for="account_no">Shipping Account Number</label>
-                        <input type="text"
-                               class="form-control @if($errors->has('account_no')) is-invalid @endif"
-                               value="{{ old('account_no') }}" id="account_no" name="account_no"
-                               placeholder="Enter an Shipping Account Number" data-parsley-required="true">
-                        @if($errors->has('account_no'))
-                            <span class="error invalid-feedback">{{ $errors->first('account_no') }}</span>
-                        @endif
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="shipper_account_no">Shipper Account Number</label>
+                                <input type="text"
+                                       class="form-control @if($errors->has('shipper_account_no')) is-invalid @endif"
+                                       value="{{ old('shipper_account_no') }}" id="shipper_account_no"
+                                       name="shipper_account_no"
+                                       placeholder="Enter an Shipper Account Number" data-parsley-required="true">
+                                @if($errors->has('shipper_account_no'))
+                                    <span
+                                        class="error invalid-feedback">{{ $errors->first('shipper_account_no') }}</span>
+                                @endif
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <label for="recipient_account_no">Recipient Account Number</label>
+                            <input type="text"
+                                   class="form-control @if($errors->has('recipient_account_no')) is-invalid @endif"
+                                   value="{{ old('account_no') }}" id="recipient_account_no" name="recipient_account_no"
+                                   placeholder="Enter an Recipient Account Number" data-parsley-required="true">
+                            @if($errors->has('recipient_account_no'))
+                                <span class="error invalid-feedback">{{ $errors->first('recipient_account_no') }}</span>
+                            @endif
+                        </div>
                     </div>
                     <div class="row">
                         <div class="col-sm-6">
@@ -143,25 +160,111 @@
                     <div class="row">
                         <div class="col-sm-6">
                             <div class="form-group">
-                                <label for="shipper_zip_code">Shipper Zip Code</label>
-                                <input type="text" name="shipper_zip_code" id="shipper_zip_code"
-                                       value="{{ old('shipper_zip_code') }}"
-                                       class="form-control @if($errors->has('shipper_zip_code')) is-invalid @endif"
-                                       placeholder="Shipper Zip Code" data-parsley-required="true">
-                                @if($errors->has('shipper_country'))
-                                    <span class="error invalid-feedback">{{ $errors->first('shipper_country') }}</span>
+                                <label for="shipper_postal_code">Shipper Postal Code</label>
+                                <input type="text" name="shipper_postal_code" id="shipper_postal_code"
+                                       value="{{ old('shipper_postal_code') }}"
+                                       class="form-control @if($errors->has('shipper_postal_code')) is-invalid @endif"
+                                       placeholder="Shipper postal Code" data-parsley-required="true">
+                                @if($errors->has('shipper_postal_code'))
+                                    <span
+                                        class="error invalid-feedback">{{ $errors->first('shipper_postal_code') }}</span>
                                 @endif
                             </div>
                         </div>
                         <div class="col-sm-6">
                             <div class="form-group">
-                                <label for="recipient_zip_code">Recipient Zip Code</label>
-                                <input type="text" name="recipient_zip_code" id="recipient_zip_code"
-                                       value="{{ old('recipient_zip_code') }}"
-                                       class="form-control @if($errors->has('recipient_zip_code')) is-invalid @endif"
-                                       placeholder="Recipient Zip Code" data-parsley-required="true">
+                                <label for="recipient_postal_code">Recipient Postal Code</label>
+                                <input type="text" name="recipient_postal_code" id="recipient_postal_code"
+                                       value="{{ old('recipient_postal_code') }}"
+                                       class="form-control @if($errors->has('recipient_postal_code')) is-invalid @endif"
+                                       placeholder="Recipient Postal Code" data-parsley-required="true">
                                 @if($errors->has('recipient_country'))
-                                    <span class="error invalid-feedback">{{ $errors->first('recipient_country') }}</span>
+                                    <span
+                                        class="error invalid-feedback">{{ $errors->first('recipient_country') }}</span>
+                                @endif
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="shipper_state_code">Shipper State or Province Code</label>
+                                <input type="text" name="shipper_state_code" id="shipper_state_code"
+                                       value="{{ old('shipper_state_code') }}" data-parsley-maxlength="2"
+                                       class="form-control @if($errors->has('shipper_state_code')) is-invalid @endif"
+                                       placeholder="Shipper State or Province Code" data-parsley-required="true">
+                                <small class="text-muted">Ex. AR etc</small>
+                                @if($errors->has('shipper_state_code'))
+                                    <span
+                                        class="error invalid-feedback">{{ $errors->first('shipper_state_code') }}</span>
+                                @endif
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="recipient_state_code">Recipient State or Province Code</label>
+                                <input type="text" name="recipient_state_code" id="recipient_state_code"
+                                       value="{{ old('recipient_state_code') }}" data-parsley-maxlength="2"
+                                       class="form-control @if($errors->has('recipient_state_code')) is-invalid @endif"
+                                       placeholder="Shipper State or Province Code" data-parsley-required="true">
+                                <small class="text-muted">Ex. AR etc</small>
+                                @if($errors->has('recipient_state_code'))
+                                    <span
+                                        class="error invalid-feedback">{{ $errors->first('recipient_state_code') }}</span>
+                                @endif
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="shipper_city">Shipper City</label>
+                                <input type="text" name="shipper_city" id="shipper_city"
+                                       value="{{ old('shipper_city') }}"
+                                       class="form-control @if($errors->has('shipper_city')) is-invalid @endif"
+                                       placeholder="Shipper City" data-parsley-required="true">
+                                @if($errors->has('shipper_city'))
+                                    <span class="error invalid-feedback">{{ $errors->first('shipper_city') }}</span>
+                                @endif
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="recipient_city">Recipient City</label>
+                                <input type="text" name="recipient_city" id="recipient_city"
+                                       value="{{ old('recipient_city') }}"
+                                       class="form-control @if($errors->has('recipient_city')) is-invalid @endif"
+                                       placeholder="Recipient City" data-parsley-required="true">
+                                @if($errors->has('recipient_city'))
+                                    <span class="error invalid-feedback">{{ $errors->first('recipient_city') }}</span>
+                                @endif
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="street_line">Street Lines</label>
+                                <input type="text" name="street_line" id="street_line"
+                                       value="{{ old('street_line') }}"
+                                       class="form-control @if($errors->has('street_line')) is-invalid @endif"
+                                       placeholder="Street Lines" data-parsley-required="true">
+                                @if($errors->has('street_line'))
+                                    <span class="error invalid-feedback">{{ $errors->first('street_line') }}</span>
+                                @endif
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <label for="item_id">Item ID</label>
+                                <input type="text" name="item_id" id="item_id"
+                                       value="{{ old('item_id') }}"
+                                       class="form-control @if($errors->has('item_id')) is-invalid @endif"
+                                       placeholder="Recipient City" data-parsley-required="true">
+                                <small class="text-muted">Ex. Books etc</small>
+                                @if($errors->has('item_id'))
+                                    <span class="error invalid-feedback">{{ $errors->first('item_id') }}</span>
                                 @endif
                             </div>
                         </div>
@@ -192,7 +295,8 @@
                                     data-parsley-errors-container="#freightClassValidationErrorMessage">
                                 <option value="">Select an Option</option>
                                 @foreach($freights as $item)
-                                    <option value="{{ $item['code'] }}">{{ $item['type'] . ' (' . $item['weight'] .')' }}</option>
+                                    <option
+                                        value="{{ $item['code'] }}">{{ $item['type'] . ' (' . $item['weight'] .' / ' . $item['code'] .')' }}</option>
                                 @endforeach
                             </select>
                             <div id="freightClassValidationErrorMessage"></div>
@@ -200,6 +304,16 @@
                                 <span class="error invalid-feedback">{{ $errors->first('freight_class') }}</span>
                             @endif
                         </div>
+                    </div>
+
+                    <div class="from-group row">
+                        <label for="product_quantity" class="col-sm-2 col-form-label">Product Quantity</label>
+                        <input type="text" id="product_quantity" name="product_quantity"
+                               class="form-control @if($errors->has('product_quantity')) is-invalid @endif"
+                               placeholder="Quantity" data-parsley-required="true" data-parsley-type="digits">
+                        @if($errors->has('product_quantity'))
+                            <span class="error invalid-feedback">{{ $errors->first('product_quantity') }}</span>
+                        @endif
                     </div>
                 </div>
                 <div class="card-footer">

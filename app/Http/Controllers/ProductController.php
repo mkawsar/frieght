@@ -5,16 +5,20 @@ namespace App\Http\Controllers;
 use App\Http\Requests\Product\CreateProductFormRequest;
 use App\Interfaces\ShippingFreightInterface;
 use App\Models\Product;
+use App\Traits\FedexFreightTrait;
 use App\Traits\UploadTrait;
 use Illuminate\Support\Str;
 
 class ProductController extends Controller
 {
-    use UploadTrait;
+    use UploadTrait, FedexFreightTrait;
 
-    public function __construct()
+    private $shipping;
+
+    public function __construct(ShippingFreightInterface $shipping)
     {
         $_SESSION["menuActive"] = 'product';
+        $this->shipping = $shipping;
     }
 
     public function index(): object
@@ -22,10 +26,10 @@ class ProductController extends Controller
         return view('product.index');
     }
 
-    public function create(ShippingFreightInterface $shipping): object
+    public function create(): object
     {
-        $currencies = $shipping->getCurrencyCode();
-        $uomcodes = $shipping->getUOMCode();
+        $currencies = $this->shipping->getCurrencyCode();
+        $uomcodes = $this->shipping->getUOMCode();
         return view('product.create', ['currencies' => $currencies, 'uomcodes' => $uomcodes]);
     }
 
@@ -39,8 +43,6 @@ class ProductController extends Controller
             $name = Str::slug($request->input('title')) . '_' . time();
             // Define folder path
             $folder = '/product/images';
-            // Make a file path where image will be stored [ folder path + file name + file extension]
-            $filePath = $folder . $name . '.' . $image->getClientOriginalExtension();
             // Upload image
             $imageID = $this->upload($image, $folder, 'public', $name, $image->getClientMimeType());
         }
@@ -70,7 +72,16 @@ class ProductController extends Controller
 
     public function getProductRates(Product $product, $uuid)
     {
+        return $this->getOauth();
         $product = $product->query()->where('uuid', '=', $uuid)->first();
-        return view('product.freight-rate');
+        $countries = $this->shipping->getCountryCode();
+        $freights = $this->shipping->getFreightClass();
+        $packages = $this->shipping->getPackageType();
+        return view('product.freight-rate', [
+            'product' => $product,
+            'countries' => $countries,
+            'freights' => $freights,
+            'packages' => $packages
+        ]);
     }
 }

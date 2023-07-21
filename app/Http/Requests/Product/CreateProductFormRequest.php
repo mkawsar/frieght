@@ -2,7 +2,7 @@
 
 namespace App\Http\Requests\Product;
 
-use App\Enums\WeightType;
+use App\Enums\WeightUnit;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rules\Enum;
 
@@ -35,7 +35,7 @@ class CreateProductFormRequest extends FormRequest
             'width' => 'required',
             'height' => 'required',
             'weight' => 'required',
-            'weight_type' => ['required', new Enum(WeightType::class)]
+            'weight_unit' => ['required', new Enum(WeightUnit::class)]
         ];
     }
 }

@@ -168,17 +168,17 @@
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label for="weight_type" class="col-sm-2 col-form-label">Weight Type</label>
+                        <label for="weight_unit" class="col-sm-2 col-form-label">Weight Unit</label>
                         <div class="col-sm-10">
-                            <select name="weight_type" id="weight_type"
-                                    class="form-control @if($errors->has('weight_type')) is-invalid @endif"
+                            <select name="weight_unit" id="weight_type"
+                                    class="form-control @if($errors->has('weight_unit')) is-invalid @endif"
                                     data-parsley-required="true">
                                 <option value="">Select an Option</option>
                                 <option value="kg">KG</option>
                                 <option value="lb">LB</option>
                             </select>
-                            @if($errors->has('weight_type'))
-                                <span class="error invalid-feedback">{{ $errors->first('weight_type') }}</span>
+                            @if($errors->has('weight_unit'))
+                                <span class="error invalid-feedback">{{ $errors->first('weight_unit') }}</span>
                             @endif
                         </div>
                     </div>

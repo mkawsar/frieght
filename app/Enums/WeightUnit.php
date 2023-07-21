@@ -2,7 +2,7 @@
 
 namespace App\Enums;
 
-enum WeightType: string
+enum WeightUnit: string
 {
     case KG = 'kg';
     case LB = 'lb';

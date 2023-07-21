@@ -24,7 +24,7 @@ return new class extends Migration {
             $table->string('width')->nullable();
             $table->string('height')->nullable();
             $table->string('weight')->nullable();
-            $table->string('weight_type')->nullable();
+            $table->string('weight_unit')->nullable();
             $table->string('status')->default('pending');
             $table->unsignedInteger('created_by')->unsigned()->nullable();
             $table->unsignedInteger('updated_by')->unsigned()->nullable();
